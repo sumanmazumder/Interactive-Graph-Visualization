@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../reducers/store';
+import { RootState } from '../../reducers/store';
 import { inFlowData } from "./inflowData";
 import { outFlowData } from "./outflowData";
 import '@xyflow/react/dist/style.css';
@@ -19,7 +19,7 @@ import {
     MarkerType,
     Node,
     Edge,
-    Connection,
+    // Connection,
     BackgroundVariant, Handle,
 } from "@xyflow/react";
 import inflowImg from "../../assets/inflow.svg"
@@ -75,39 +75,20 @@ const nodeType = {
     outflow: OutflowNode,
 }
 
-
-let nodeId = 0;
-const getId = () => `node_${nodeId++}`;
-
-// type NodeType = "inflow" | "outflow" | "tx";
 type WalletNode = Node & { type: "inflow" | "outflow" | 'left' | 'right'; };
 
-// const initialNodes = [
-//     { id: '1', position: { x: 0, y: 0 }, data: { label: '5' } },
-//     { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
-// ];
-// const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
-// const generateNodesFromInflow = () => {
-//     return inFlowData.data.map((item, index) => ({
-//         id: getId(),
-//         position: { x: 100, y: index * 100 }, // Spread vertically
-//         data: {
-//             label: `${item.beneficiary_address || 'Unknown'} (${item.amount} ${item.token_type})`
-//         }
-//     }));
-// };
-// console.log("WalletNode", WalletNode);
 
-const manualNodePositions:any = {
-    'Changnow': { x: 0, y: 200 },
-    'Unknown1': { x: 200, y: 100 },
-    'Custom Node': { x: 400, y: 100 },
-    'Whitebit1': { x: 600, y: 100 },
-    'Unknown2': { x: 800, y: 100 },
-    'Unknown3': { x: 1000, y: 100 },
-    'Unknown4': { x: 600, y: 300 }, // lower tier
-    'Whitebit2': { x: 800, y: 300 }, // lower tier
-};
+
+// const manualNodePositions:any = {
+//     'Changnow': { x: 0, y: 200 },
+//     'Unknown1': { x: 200, y: 100 },
+//     'Custom Node': { x: 400, y: 100 },
+//     'Whitebit1': { x: 600, y: 100 },
+//     'Unknown2': { x: 800, y: 100 },
+//     'Unknown3': { x: 1000, y: 100 },
+//     'Unknown4': { x: 600, y: 300 }, // lower tier
+//     'Whitebit2': { x: 800, y: 300 }, // lower tier
+// };
 
 
 
@@ -350,7 +331,7 @@ const Dashboard = () => {
     // Egges Create
     // const initialEdges = generateEdgesFromTransactions(inFlowData, outFlowData);
     // const initialEdges = generateEdegeS(initialNodes);
-    const edgesFromRedux = useMemo(() => generateEdegeS(nodesFromRedux), [nodesFromRedux]);
+    // const edgesFromRedux = useMemo(() => generateEdegeS(nodesFromRedux), [nodesFromRedux]);
 
 
     const [nodes, setNodes, onNodesChange] = useNodesState(nodesFromRedux);
@@ -358,7 +339,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         const nodes = generateWalletNodes(inflowReduxData, outflowReduxData);
-        const edges = generateEdegeS(nodes);
+        // const edges = generateEdegeS(nodes);
         setNodes(nodes);
         setEdges(initialEdeges);
     }, [inflowReduxData, outflowReduxData]);
@@ -372,15 +353,6 @@ const Dashboard = () => {
         })
     }, [setEdges]);
 
-    // const onEdegeConnection = useCallback((connection: Connection) => {
-    //     console.log("connection", connection);
-    // }, []);
-
-
-    // const reactFlowInstance = useRef<any>(null);
-    // const onInit = useCallback((instance: any) => {
-    //     reactFlowInstance.current = instance;
-    // }, []);
 
     // download SVG
     const downloadSvg = () => {

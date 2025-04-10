@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router";
+import { BrowserRouter as Outlet } from "react-router";
 import Header from '../common/components/Headers';
 import { SidebarPanel } from '../common/components/Sidebar';
 

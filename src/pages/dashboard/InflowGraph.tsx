@@ -1,6 +1,5 @@
-import React, { useCallback, useRef } from "react";
+import { useCallback, useRef } from "react";
 import { inFlowData } from "./inflowData";
-import { outFlowData } from "./outflowData";
 import '@xyflow/react/dist/style.css';
 import { Position } from "@xyflow/react";
 import { toSvg } from 'html-to-image';
@@ -16,7 +15,6 @@ import {
   MarkerType,
   Node,
   Edge,
-  Connection,
   BackgroundVariant, Handle,
 } from "@xyflow/react";
 import inflowImg from "../../assets/inflow.svg"
@@ -47,12 +45,11 @@ const nodeType = {
   inflow: InflowNode,
   // outflow: OutflowNode,
 }
-let nodeId = 0;
-const getId = () => `node_${nodeId++}`;
+// let nodeId = 0;
 
 type WalletNode = Node & { type: "inflow" | "outflow" | 'left' | 'right'; };
 
-const generateWalletNodes = (inFlowData: any, outFlowData: any): WalletNode[] => {
+const generateWalletNodes = (inFlowData: any): WalletNode[] => {
   const walletMap = new Map<string, WalletNode>();
   let y = 0;
   // Inflow nodes
@@ -104,7 +101,7 @@ const InflowGraph = () => {
   const reactFlowWrapper = useRef<HTMLDivElement | null>(null);
 
   // const initialNodes = generateNodesFromInflow();
-  const initialNodes = generateWalletNodes(inFlowData, outFlowData);
+  const initialNodes = generateWalletNodes(inFlowData);
 
   // const initialEdges = generateEdgesFromTransactions(inFlowData, outFlowData);
   const initialEdges = generateEdegeS(initialNodes)
@@ -114,10 +111,12 @@ const InflowGraph = () => {
 
   const onConnect = useCallback((params: any) => {
     console.log("Connection", params);
+    console.log(setNodes)
     return setEdges((eds: any) => {
       console.log("eds", eds);
       return addEdge(params, eds)
-    })
+    });
+    
   }, [setEdges]);
 
   const downloadSvg = () => {
