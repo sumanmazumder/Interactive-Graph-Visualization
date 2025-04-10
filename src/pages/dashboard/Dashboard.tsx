@@ -159,31 +159,31 @@ const generateWalletNodes = (inFlowData: any, outFlowData: any): WalletNode[] =>
 };
 
 
-const generateEdegeS = (nodes: Node[]): Edge[] => {
-    const edges: Edge[] = [];
-    for (let i = 0; i < nodes.length - 1; i++) {
-        edges.push({
-            id: `e${nodes[i].id}-${nodes[i + 1].id}`,
-            source: nodes[i].id,
-            target: nodes[i + 1].id,
-            markerEnd: {
-                type: MarkerType.Arrow,
-            },
-            animated: true,
-            type: 'smoothstep',
-            style: {
-                strokeWidth: 3,
-                stroke: '#333'
-            },
-            labelStyle: {
-                fill: "#000",          // Optional: label color
-                fontWeight: 600,
-                fontSize: 12,
-            },
-        });
-    }
-    return edges;
-}
+// const generateEdegeS = (nodes: Node[]): Edge[] => {
+//     const edges: Edge[] = [];
+//     for (let i = 0; i < nodes.length - 1; i++) {
+//         edges.push({
+//             id: `e${nodes[i].id}-${nodes[i + 1].id}`,
+//             source: nodes[i].id,
+//             target: nodes[i + 1].id,
+//             markerEnd: {
+//                 type: MarkerType.Arrow,
+//             },
+//             animated: true,
+//             type: 'smoothstep',
+//             style: {
+//                 strokeWidth: 3,
+//                 stroke: '#333'
+//             },
+//             labelStyle: {
+//                 fill: "#000",          // Optional: label color
+//                 fontWeight: 600,
+//                 fontSize: 12,
+//             },
+//         });
+//     }
+//     return edges;
+// }
 
 const initialEdeges: Edge[] = [
     {
