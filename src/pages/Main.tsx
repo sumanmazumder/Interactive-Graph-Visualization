@@ -1,4 +1,4 @@
-import { BrowserRouter as Outlet } from "react-router";
+import { Outlet } from "react-router-dom";
 import Header from '../common/components/Headers';
 import { SidebarPanel } from '../common/components/Sidebar';
 
@@ -12,7 +12,7 @@ export default function Main() {
             <div className='body flex-1 transition-all duration-300 ease-in-out lg:ml-[290px]'>
                 <Header />
                 <div className='outlet relative'>
-                    <Outlet />
+                        <Outlet />
                 </div>
             </div>
         </>
